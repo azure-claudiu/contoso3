@@ -1,0 +1,28 @@
+kind: Deployment
+metadata:
+  name: obj-detector
+spec:
+  selector:
+    matchLabels:
+      app: obj-detector
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: obj-detector
+    spec:
+      containers:
+      - name: objectdetector
+        image: smilracr.azurecr.io/atlas/objectdetector:1.0
+        imagePullPolicy: Always
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+        ports:
+        - containerPort: 5001
+      imagePullSecrets:
+      - name:smilr-secret
+      tolerations:
+      - key: nvidia.com/gpu
+        operator: Exists
+        effect: NoSchedule
