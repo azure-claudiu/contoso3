@@ -1,0 +1,6 @@
+images:
+- name: smilracr.azurecr.io/atlas/objectdetector
+  newTag: "1.0"
+
+resources:
+- ../base
